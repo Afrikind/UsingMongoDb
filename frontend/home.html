@@ -1,0 +1,72 @@
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+
+function getCookieValue(cookieName) {
+    const name = cookieName + "=";
+    console.log("document.cookie "+document.cookie)
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return null;
+}
+
+
+let checkSession = ()=>{
+  let curr_user = getCookieValue("username");
+  if (curr_user && curr_user !== "") {
+    document.getElementById("loginlogout").innerHTML = 
+    '<span class="homepage_links" style="margin-right:10px">' + curr_user +'</span>' +
+    '<a class="homepage_links" href="/api/logout">Logout</a>'
+  } else {
+    document.getElementById("loginlogout").innerHTML = 
+    '<a style="margin-left:10px;font-size:larger" href="/static/login.html">Login</a>'+
+    '<a style="margin-left:10px;font-size:larger"  href="/static/register.html">Register</a>'
+  }
+ }
+</script>
+</head>
+<body onload="checkSession()">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(209, 103, 156); height: 1in;">
+  <div class="container-fluid">
+    <h2 style="padding-right: 5%;">Shopaweholic</h2>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" style="font-size: larger;" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: larger;" href="/">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: larger;" href="/">Contact Us</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        <div class="loginlink" id="loginlogout">
+        </div>
+        </span>
+    </div>
+  </div>
+</nav>
+<div style="display: flex;flex-direction: column;">
+<div style="width: 50%;margin-top: 50px;align-self: center;display: flex;flex-direction: row;margin: auto; justify-content: center;">
+  <img src="/static/shoppingcart.png" style="width:500px" alt="...">
+</div>
+<div style="display: flex;flex-direction: row;margin: auto; justify-content: center;">
+  <h1 style="color:rgb(209, 103, 156)">Happy Shopping!!</h1>
+</div>
+</div>
+</body>
+</html>
